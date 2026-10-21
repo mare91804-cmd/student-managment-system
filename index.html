@@ -1,51 +1,194 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
+  <title>Student Management System</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>My Portfolio</h1>
-    <h1> i am maritu</h1>
-    <nav>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Hello! I am a 3rd-year Software Engineering student passionate about building web applications and learning new technologies.</p>
-  </section>
+<header class="header">
+  <h2>🎓 Student Management System</h2>
+  <nav>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#register">Register Student</a>
+    <a href="#records">Student Records</a>
+    <a href="#rankings">Rankings</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Project 1</h3>
-      <p>Description of the project.</p>
+<main class="container">
+
+  <section class="hero" id="dashboard">
+    <div>
+      <p class="tag">STUDENT INFORMATION PORTAL</p>
+      <h1>Manage Students Smarter</h1>
+      <p>Register students, manage academic records, search information, and rank student performance in one place.</p>
+      <a class="btn" href="#register">+ Register a Student</a>
     </div>
-    <div class="project">
-      <h3>Project 2</h3>
-      <p>Description of the project.</p>
+    <div class="hero-icon">🎓</div>
+  </section>
+
+  <h2>Dashboard Overview</h2>
+
+  <section class="stats">
+    <div class="stat-card">
+      <span>Total Students</span>
+      <h2 id="totalStudents">0</h2>
+    </div>
+    <div class="stat-card">
+      <span>Departments</span>
+      <h2 id="totalDepartments">0</h2>
+    </div>
+    <div class="stat-card">
+      <span>Average Mark</span>
+      <h2 id="averageMark">0</h2>
+    </div>
+    <div class="stat-card">
+      <span>Passing Students</span>
+      <h2 id="passingStudents">0</h2>
     </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: your.email@example.com</p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">Your LinkedIn</a></p>
+  <section class="panel" id="register">
+    <h2 id="formTitle">Register New Student</h2>
+    <p>Add student information to the system.</p>
+
+    <form id="studentForm">
+      <input type="hidden" id="editId">
+
+      <div class="form-grid">
+        <div>
+          <label for="studentId">Student ID</label>
+          <input id="studentId" placeholder="e.g. SE001" required>
+        </div>
+        <div>
+          <label for="studentName">Full Name</label>
+          <input id="studentName" placeholder="Enter full name" required>
+        </div>
+        <div>
+          <label for="department">Department</label>
+          <select id="department" required>
+            <option value="">Select department</option>
+            <option>Software Engineering</option>
+            <option>Computer Science</option>
+            <option>Information Technology</option>
+            <option>Information Systems</option>
+            <option>Electrical Engineering</option>
+          </select>
+        </div>
+        <div>
+          <label for="year">Academic Year</label>
+          <select id="year" required>
+            <option value="">Select year</option>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+            <option>5th Year</option>
+          </select>
+        </div>
+        <div>
+          <label for="mark">Total Mark (0–100)</label>
+          <input id="mark" type="number" min="0" max="100"
+                 step="0.01" placeholder="Enter mark" required>
+        </div>
+        <div>
+          <label for="status">Student Status</label>
+          <select id="status">
+            <option>Active</option>
+            <option>Graduated</option>
+            <option>Inactive</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn" type="submit" id="saveButton">Save Student</button>
+        <button class="btn secondary" type="reset">Clear Form</button>
+      </div>
+    </form>
   </section>
 
-  <footer>
-    <p>&copy; 2026 Your Name</p>
-  </footer>
+  <section class="panel" id="records">
+    <h2>Student Records</h2>
+    <p>Search and manage registered student information.</p>
 
-  <script src="script.js"></script>
+    <input id="searchInput"
+           placeholder="Search by ID, name, department, or status...">
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Full Name</th>
+            <th>Department</th>
+            <th>Year</th>
+            <th>Mark</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="studentTable"></tbody>
+      </table>
+    </div>
+    <p id="emptyMessage">No student records found.</p>
+  </section>
+
+  <section class="panel" id="rankings">
+    <h2>Student Rankings 🏆</h2>
+    <p>Students are ranked from highest to lowest based on total marks.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Student ID</th>
+            <th>Full Name</th>
+            <th>Department</th>
+            <th>Mark</th>
+            <th>Performance</th>
+          </tr>
+        </thead>
+        <tbody id="rankingTable"></tbody>
+      </table>
+    </div>
+    <p id="rankingEmpty">Register students to see their rankings.</p>
+  </section>
+
+  <section class="panel" id="about">
+    <h2>About This Project</h2>
+    <p>
+      The Student Management System is a beginner-friendly Software Engineering
+      internship project that organizes student information and academic results.
+    </p>
+    <h3>Technologies Used</h3>
+    <div class="technology-list">
+      <span>HTML5</span>
+      <span>CSS3</span>
+      <span>JavaScript</span>
+      <span>Local Storage</span>
+      <span>Git & GitHub</span>
+    </div>
+    <p class="note">
+      This demonstration stores data in your browser. It does not yet use a
+      server, a MySQL database, or administrator authentication.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <p>Student Management System | Internship Portfolio Project</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
+
+
